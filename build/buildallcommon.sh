@@ -2,9 +2,11 @@
 
 set -e
 
-projectstobuild=("lib_messaging_rest" 
+projectstobuild=("lib_messaging_rest"
 				 "profiles/messages" "profiles/client"
-				 "security/messages" "security/client")
+				 "profiles_creator/messages" "profiles_creator/client"
+				 "security/messages" "security/client"
+				 )
 
 for project in ${projectstobuild[@]}
 do
@@ -13,7 +15,7 @@ do
 	pushd . > /dev/null
 
 	cd $project
-	mvn -q clean install
+	mvn -q clean test verify install
 	
 	popd > /dev/null
 done
